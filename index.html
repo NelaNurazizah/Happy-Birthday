@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ucapan Ulang Tahun</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Baloo 2', cursive;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      animation: fadeIn 1.5s ease-in-out;
+      width: 90%;
+      max-width: 600px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .love-icon {
+      font-size: 50px;
+      cursor: pointer;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      background-color: #ff6f91;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #ff3f6c;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      width: 80%;
+    }
+
+    .cake {
+      font-size: 80px;
+      animation: shake 1s infinite;
+    }
+
+    @keyframes shake {
+      0% { transform: rotate(0); }
+      25% { transform: rotate(2deg); }
+      50% { transform: rotate(0); }
+      75% { transform: rotate(-2deg); }
+      100% { transform: rotate(0); }
+    }
+
+    .final-message {
+      margin-top: 20px;
+      font-size: 18px;
+      background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+      padding: 15px;
+      border-radius: 15px;
+      color: #333;
+      animation: fadeIn 2s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="step1">
+      <div class="love-icon" onclick="showStep2()">❤️</div>
+      <h2>Klik emotnya</h2>
+    </div>
+
+    <div id="step2" class="hidden">
+      <h2>Cieee yang lagi ultah 😂😍😙🎉</h2>
+      <button onclick="showStep3()">Next</button>
+    </div>
+
+    <div id="step3" class="hidden">
+      <h2>Yuk kenalan dulu🥰</h2>
+      <input type="text" id="nameInput" placeholder="Nama...">
+      <br><br>
+      <button onclick="showStepVideo()">Klik akuuu😉</button>
+    </div>
+
+    <div id="stepVideo" class="hidden">
+      <video id="birthdayVideo" width="100%" controls>
+        <source src="assets/ssstik.io_@eromi_tube_1754115003729.mp4" type="video/mp4">
+        Browser kamu tidak mendukung video.
+      </video>
+      <br>
+      <button onclick="showBirthdayMessage()">Next</button>
+    </div>
+
+    <div id="step4" class="hidden">
+      <h2 id="greeting"></h2>
+      <div class="cake">🎂</div>
+      <audio id="birthdaySong"autoplay muted playsinline>
+        <source src="assets/ssstik (mp3cut.net).mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+      <div class="final-message">
+        Selamat ulang tahun! Semoga tahun depan lebih baik dari tahun sebelumnya.<br>
+        Ingatlah setiap badai pasti akan diikuti oleh pelangi yang indah.<br>
+        Tetap kuat, tetap semangat, dan percayalah bahwa kehidupan yang lebih baik sedang menanti didepan.<br>
+        Selamat merayakan hari spesialmu. Love you 🌈💖🎂🍰🎉
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showStep2() {
+      document.getElementById("step1").classList.add("hidden");
+      document.getElementById("step2").classList.remove("hidden");
+    }
+
+    function showStep3() {
+      document.getElementById("step2").classList.add("hidden");
+      document.getElementById("step3").classList.remove("hidden");
+    }
+
+    function showStepVideo() {
+      const name = document.getElementById("nameInput").value;
+      if(name.trim() === "") {
+        alert("Nama tidak boleh kosong!");
+        return;
+      }
+      document.getElementById("step3").classList.add("hidden");
+      document.getElementById("stepVideo").classList.remove("hidden");
+      document.getElementById("greeting").innerText = `Selamat Ulang Tahun, ${name}! 🎉`;
+    }
+
+    function showBirthdayMessage() {
+    document.getElementById("stepVideo").classList.add("hidden");
+    document.getElementById("step4").classList.remove("hidden");
+
+    const audio = document.getElementById("birthdaySong");
+    audio.muted = false; // <--- ini penting agar suaranya keluar
+    audio.currentTime = 0;
+    audio.play().catch(err => {
+      console.warn("Autoplay gagal, user harus klik sesuatu dulu:", err);
+    });
+    }
+  </script>
+</body>
+</html>
